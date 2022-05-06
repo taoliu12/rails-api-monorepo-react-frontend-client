@@ -1,0 +1,20 @@
+{
+
+    "name": "rails-api-monorepo-top-lvl",
+
+    "description": "Project Outter package.json - Will Include Heroku Scripts At Deployment Time",
+
+    "engines": {
+
+        "node": "16.x"
+
+    },
+
+    "scripts": {
+
+        "start": "npm start --prefix client"
+
+    }
+
+}
+
