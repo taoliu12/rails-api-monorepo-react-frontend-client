@@ -6,6 +6,11 @@ puts "Starting Seeding...."
 
 # We DESTORY from Dependent -> Independent
 
+WooblySnack.destroy_all
+
+Woobly.destroy_all
+
+Snack.destroy_all
 User.destroy_all
 
 
@@ -30,7 +35,7 @@ puts "Seeding New Users...."
 
 # ]
 
-User.create(  
+sam = User.create(  
 
     name: "Sam",
     username: "SamBob",
@@ -44,7 +49,7 @@ User.create(
 # t.string :password  ->  salt + hashing   ->  :password_digest
 
 
-User.create(  
+amy = User.create(  
 
     name: "Amy",
     username: "AmyYay",
@@ -55,7 +60,7 @@ User.create(
 )
 
 
-User.create(  
+sakinah = User.create(  
 
     name: "Sakinah",
     username: "sannaishaq",
@@ -75,8 +80,47 @@ User.create(
 
 # t.string :password  ->  :password_digest
 
-# User -< Wooblies -< Sales >- Snacks
+# User -< Wooblies -< Merchandise (Sales) >- Snacks
 # User  >  Snack  >  Woobly  >  Sale
+
+
+
+
+
+
+puts "Seeding New Snacks...."
+
+
+ice_cream  = Snack.create( name: "ice cream" )
+chips      = Snack.create( name: "chips")
+pineapples = Snack.create( name: "pineapples" )
+
+
+
+puts "Seeding New Wooblies...."
+# U -< [] Woobly
+
+
+woobly = Woobly.create( name: "Woobly", user_id: sam.id )
+joobly = Woobly.create( name: "WaWaW",  user: sam )
+
+wawawa = Woobly.create( name: "Joobly", user_id: amy.id )
+
+
+
+
+puts "Seeding New WooblySnacks...."
+# Woobly -< [] WooblySnack [] >- Snack
+
+
+WooblySnack.create( price: 5.55, woobly_id: woobly.id, snack_id: ice_cream.id )
+WooblySnack.create( price: 5.55, woobly:    woobly,    snack:    chips )
+
+WooblySnack.create( price: 4.00, woobly:    joobly,    snack:    chips )
+
+
+
+
 
 
 

@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_155105) do
+ActiveRecord::Schema.define(version: 2022_05_09_200929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "snacks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,4 +30,25 @@ ActiveRecord::Schema.define(version: 2022_05_06_155105) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "wooblies", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_wooblies_on_user_id"
+  end
+
+  create_table "woobly_snacks", force: :cascade do |t|
+    t.float "price"
+    t.bigint "woobly_id", null: false
+    t.bigint "snack_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["snack_id"], name: "index_woobly_snacks_on_snack_id"
+    t.index ["woobly_id"], name: "index_woobly_snacks_on_woobly_id"
+  end
+
+  add_foreign_key "wooblies", "users"
+  add_foreign_key "woobly_snacks", "snacks"
+  add_foreign_key "woobly_snacks", "wooblies"
 end

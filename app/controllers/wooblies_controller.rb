@@ -1,0 +1,2 @@
+class WoobliesController < ApplicationController
+end

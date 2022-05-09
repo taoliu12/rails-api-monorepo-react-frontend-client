@@ -1,0 +1,2 @@
+class WooblySnacksController < ApplicationController
+end
