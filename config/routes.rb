@@ -10,14 +10,47 @@ Rails.application.routes.draw do
 
   get "snacks/:keyboard_mash", to: "snacks#woobly"
 
-  # post "/login", to:"sessions#create"
-  # post "/login", to:"sessions#login"
 
 
-  resources :users
-  # get "/users", to: "users#index"
+
+  resources :users, except: [:index]
+
+      get    "/users",       to: "users#index"
+      # **** get    "/users/admin",       to: "users#index"
+
+    # get    "/users/:id",   to: "users#show"
+    # post   "/users",       to: "users#create"
+    # patch   "/users/:id",  to: "users#update"
+    # delete  "/users/:id",  to: "users#destroy"
+
+  # resources :users, only: [:show, :create, :update, :destroy]
+
+
+  post   "/login",         to:"sessions#create"
+  # post "/login", to:"session#login"
+
+    get    "/userInSession", to:"sessions#get_logged_in_user"
+  
+  delete "/logout",        to:"sessions#destroy"
+  # post "/login", to:"session#logout"
+
+  
+  #X# post "/login", to: "application#login"
+  ####  Just as a Starter
+
   
 
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
+
+
+
+# class SessionController < ApplicationController
+
+
+
+
+# end

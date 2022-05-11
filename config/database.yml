@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: rails_api_monorepo_react_frontend_client_5_6_2022_1201PM_production
-  username: rails_api_monorepo_react_frontend_client
+  username: postgres
   password: <%= ENV['RAILS_API_MONOREPO_REACT_FRONTEND_CLIENT_DATABASE_PASSWORD'] %>
