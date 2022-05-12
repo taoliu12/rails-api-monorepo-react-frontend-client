@@ -7,12 +7,17 @@ class SnacksController < ApplicationController
     end
 
 
-    def woobly
+    #### Was Just for Custom Route Example
 
-        byebug
+        # def woobly
 
-        render json: { message: "hello :P" }
+        #     byebug
 
-    end
+        #     render json: { message: "hello :P" }
+
+        # end
+        
+    #### Was Just for Custom Route Example
+
 
 end

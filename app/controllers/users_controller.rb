@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
 
 
-    
+
     ## Rescues
 
         rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
@@ -211,6 +211,22 @@ class UsersController < ApplicationController
 
 
     end
+
+
+
+
+    #### UsersController - Custom Controller Actions
+
+        def my_wooblies
+
+            logged_in_user = User.find_by( id: session[:user_id] )
+
+            render json: logged_in_user.wooblies
+
+        end
+
+    #### UsersController - Custom Controller Actions
+
 
 
 

@@ -1,21 +1,25 @@
 Rails.application.routes.draw do
   
 
-  resources :woobly_snacks
-  resources :wooblies
+  resources :woobly_snacks, only: [:create]
+
+  
+  resources :wooblies, only: [:index, :create]
 
 
-  # resources :snacks
-  get "/snacks", to: "snacks#index"
+  resources :snacks, only: [:index]
+  # get "/snacks", to: "snacks#index"
 
-  get "snacks/:keyboard_mash", to: "snacks#woobly"
+  #### Was Just for Custom Route Example
+    # get "snacks/:keyboard_mash", to: "snacks#woobly"
+  #### Was Just for Custom Route Example
 
 
 
 
   resources :users, except: [:index]
 
-      get    "/users",       to: "users#index"
+      # get    "/users",       to: "users#index"
       # **** get    "/users/admin",       to: "users#index"
 
     # get    "/users/:id",   to: "users#show"
@@ -24,6 +28,14 @@ Rails.application.routes.draw do
     # delete  "/users/:id",  to: "users#destroy"
 
   # resources :users, only: [:show, :create, :update, :destroy]
+  # Custom User Routes - Outside of RESTFUL Convention
+
+    get "/fresh_batch_of_user_wooblies", to: "users#my_wooblies"
+
+  # Custom User Routes - Outside of RESTFUL Convention
+
+
+
 
 
   post   "/login",         to:"sessions#create"
