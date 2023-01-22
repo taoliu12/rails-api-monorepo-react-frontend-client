@@ -411,13 +411,15 @@ function App() {
 
             <form onSubmit={ handleLoginSubmit } >
 
-
+                <label>username</label>
                 <input 
                 
                   onChange={ handleOnChangeForUserToLogin } 
                   name="username"
                 
                 />
+      
+                <label>password</label>
                 <input type="password"
 
                   onChange={ handleOnChangeForUserToLogin } 
