@@ -34,6 +34,14 @@ puts "Seeding New Users...."
 #     {"id":3,"name":"Sakinah","username":"sannaishaq","email":"Sakinah@Woobly.net","password_digest":"$2a$12$ eWOBOEUwU65XLA5iNDUGFuF8BeagdPJsgZB2wP4Nka2j2fzw0hWLi"}
 
 # ]
+bbb = User.create(  
+
+    name: "bbb",
+    username: "bbb",
+    email: "bbb@Woobly.net",
+    password: "bbb" 
+
+)
 
 sam = User.create(  
 
@@ -46,6 +54,7 @@ sam = User.create(
     # password_digest: "123" 
 
 )
+
 # t.string :password  ->  salt + hashing   ->  :password_digest
 
 
