@@ -5,7 +5,7 @@
   
     ,
 
-      "proxy": "http://localhost:3000"
+      "proxy": "http://localhost:3001"
   
     ,
 
@@ -22,7 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3008 react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

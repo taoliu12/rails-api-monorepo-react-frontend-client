@@ -14,19 +14,6 @@ function App() {
   console.log( "STATE OF  loggedInUser: ", loggedInUser )  //
   //// const [ currentUser , setCurrentUser ] = useState( null )
   
-    const [ loggedInUserWooblies , setLoggedInUserWooblies ] = useState( [] )
-    console.log( "STATE OF  loggedInUserWooblies: ", loggedInUserWooblies )  //
-
-    // const [ allOfTheWooblies , setAllOfTheWooblies ] = useState( [] )
-    // console.log( "STATE OF  allOfTheWooblies: ", allOfTheWooblies )  //
-
-
-  const [ allTheSnacksOnEarth , setAllTheSnacksOnEarth ] = useState( [] )
-  console.log( "STATE OF  allTheSnacksOnEarth: ", allTheSnacksOnEarth )  //
-
-
-
-
   useEffect(  
     ()=>{
 
@@ -37,26 +24,11 @@ function App() {
       .then( userAlreadyLoggedIn => { 
         
         setLoggedInUser(userAlreadyLoggedIn) 
-        setLoggedInUserWooblies(userAlreadyLoggedIn.my_wooblies)
+    
       
       })
       // .then( setLoggedInUser )
       // .then( console.log )
-
-
-
-      fetch( "/snacks" )
-      .then( r => r.json() )
-      .then( setAllTheSnacksOnEarth )
-
-
-
-
-      // fetch( "/wooblies" )
-      // .then( r => r.json() )
-      // .then( setAllOfTheWooblies )
-
-
 
     }
     , []
@@ -103,7 +75,7 @@ function App() {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify( userToLogin )
+        body: JSON.stringify( {user: userToLogin} )
 
       } 
     )
@@ -114,297 +86,35 @@ function App() {
 
 
       setLoggedInUser( hopefullyAUser )
-      setLoggedInUserWooblies(hopefullyAUser.my_wooblies)
     
-    
+  
     })
-    // .then( console.log )  //
-
-
   }
 
   const handleLogout =()=>{
-
     fetch(  "/logout" , { method: "DELETE" }  )
     .then( r => r.json() )
     .then( deleteResponse =>{
 
       //// Pesimistic Rendering 
         setLoggedInUser( null )
-
-        setLoggedInUserWooblies( [] )
       //// Pesimistic Rendering 
 
 
     })
-
-    // //// Optimistic Rendering 
-    //   setLoggedInUser( null )
-
-    //   setLoggedInUserWooblies( [] )
-    // //// Optimistic Rendering 
-
   }
-
-
-
-  // const userWoobliesToRender = allOfTheWooblies.filter( ( eachWoobly )=>{
-
-  //   if(eachWoobly.user_id == loggedInUser.id){
-
-  //     return eachWoobly
-
-  //   }
-
-  // })
-
-
-
-
-  const [ newWoobly , upDateNewWooblyInfo ] = useState( 
-    {
-
-      name: ""
-
-    } 
-  )
-  console.log( "STATE OF  newWoobly: ", newWoobly )  //
-
-
-
-  const changeHandlerNewWooblyName =( sythEvent )=>{
-
-    upDateNewWooblyInfo( { ...newWoobly, name: sythEvent.target.value } )
-
-  }
-
-  const submitHandlerForNewWoobly =( sythEvent )=>{
-
-    sythEvent.preventDefault()
-
-    console.log("!!!! BYEBUG !!!!")
-
-    console.log(loggedInUser)  //
-
-    fetch( "/wooblies" , 
-      {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        body: JSON.stringify( newWoobly )
-
-        //// Frontend Approach
-        // body: JSON.stringify( {...newWoobly , user_id: loggedInUser.id } )
-
-      } 
-    )
-    .then( r => r.json() )
-    .then( newWooblyFromTheBackend =>{
-
-      ////////  Fetching a Fresh Batch of Data
-      ////////  Whatever's From the Backend/Database
-      ////////  Is Always Most Up-To-Date 
-
-        fetch( "/fresh_batch_of_user_wooblies" )
-        .then( r => r.json() )
-        .then( freshBatchOfWooblies => setLoggedInUserWooblies( freshBatchOfWooblies ) )
-
-      ////////  Fetching a Fresh Batch of Data
-
-        upDateNewWooblyInfo(
-          {
-      
-            name: ""
-      
-          } 
-        )
-
-    } )
-    // .then( newWooblyFromTheBackend =>{
-
-
-    //   ////////  Using our Response From the Backend
-
-    //     //// Adding our New Woobly to the Frontend
-    //     setLoggedInUserWooblies( [ ...loggedInUserWooblies , newWooblyFromTheBackend ] )
-    //     //// Clearing Our Form
-    //     upDateNewWooblyInfo(
-    //       {
-      
-    //         name: ""
-      
-    //       } 
-    //     )
-
-    //   ////////  Using our Response From the Backend
-
-
-    // } )
-    // .then( console.log )
-
-
-  }
-
-
-
-
-
-
-  ////////  Dropdown Join Model POST Request Methods
-
-
-    const [ newWooblySnack , upDateNewWooblySnackInfo ] = useState(
-
-      {
-
-        price: 0,
-
-
-        woobly_id: 0,
-
-        snack_id: 0
-
-      }
-
-    )
-    console.log( "STATE OF  newWooblySnack: ", newWooblySnack )  //
-
-
-
-    const handleSubmitForWooblySnacksCREATE =( sythEvent )=>{
-
-      sythEvent.preventDefault()
-
-      console.log("!!!! BYEBUG !!!!")  //
-
-      fetch( "/woobly_snacks" , 
-        {
-
-          method: "POST",
-          headers: { "Content-Type": "Application/json" },
-          body: JSON.stringify( newWooblySnack )
-
-        } 
-      )
-      .then( r => r.json() )
-      .then( console.log )
-
-
-    }
-
-    const changeHandlerForNewWooblySnackInputs =( sythEvent )=>{
-
-      upDateNewWooblySnackInfo( { ...newWooblySnack , [sythEvent.target.name]: sythEvent.target.value }  )
-
-    }
-
-
-  ////////  Dropdown Join Model POST Request Methods
-
-
-
-
-  //////////////////// js
-
-
-
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-
-
-
-
         {
 
           loggedInUser ?
-
-          // True Case
-          (<>
                     
             <h2>Welcome { loggedInUser.name }! :)</h2> 
-            
-            <button onClick={ handleLogout }>LogOut</button>
-
-
-            {
-
-              loggedInUserWooblies.map( ( eachWoobly )=>{
-
-                return(<h4>{eachWoobly.name}</h4>)
-
-              })
-
-            }
-              {/* {
-
-                userWoobliesToRender.map( ( eachWoobly )=>{
-
-                    return(<h4>{eachWoobly.name}</h4>)
-
-                })
-                
-
-              } */}
-
-              <form onSubmit={ handleSubmitForWooblySnacksCREATE } >
-
-
-                <select onChange={ changeHandlerForNewWooblySnackInputs } name="woobly_id" >
-
-                  <option value={0}> Select a Woobly </option>
-                  {
-
-                    loggedInUserWooblies.map( ( eachWoobly )=>{
-
-                      return(<option value={ eachWoobly.id }>{ eachWoobly.name }</option>)
-
-                    })
-
-                  }
-
-                </select>
-
-
-                  <input onChange={ changeHandlerForNewWooblySnackInputs } 
-                  
-                    value={ newWooblySnack.price }
-                    name="price"
-                    type="number"
-
-                  />
-
-
-                <select onChange={ changeHandlerForNewWooblySnackInputs } name="snack_id" >
-
-                  <option value={0}> Select a Snack </option>
-                  {
-
-                    allTheSnacksOnEarth.map( ( eachSnack )=>{
-
-                      return(<option value={ eachSnack.id }>{ eachSnack.name }</option>)
-
-                    })
-
-                  }
-
-                </select>
-
-                <br></br>
-
-                <input type="submit" />
-
-
-              </form>
-            
-            
-          </>)
-
 
           :
-
-
           (<>
           
             <h1>Welcome! Login?</h1>
@@ -438,35 +148,6 @@ function App() {
           // False Case
 
         }
-
-
-        <br/><br/><br/><br/>
-
-
-
-        <form onSubmit={ submitHandlerForNewWoobly } >
-
-          <input onChange={ changeHandlerNewWooblyName }  name="name"  value={newWoobly.name} />
-          <input type="submit"  />
-
-        </form>
-
-
-
-
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-        <h1>Or SignUp?</h1>
-
-
-
-
-
-
       </header>
     </div>
   );

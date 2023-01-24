@@ -34,6 +34,15 @@ puts "Seeding New Users...."
 #     {"id":3,"name":"Sakinah","username":"sannaishaq","email":"Sakinah@Woobly.net","password_digest":"$2a$12$ eWOBOEUwU65XLA5iNDUGFuF8BeagdPJsgZB2wP4Nka2j2fzw0hWLi"}
 
 # ]
+ccc = User.create(  
+
+    name: "ccc",
+    username: "ccc",
+    email: "ccc@Woobly.net",
+    password: "ccc" 
+
+)
+
 bbb = User.create(  
 
     name: "bbb",
