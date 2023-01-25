@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react'
+import Posts from './Posts';
 
 function App() {
   const [ loggedInUser , setLoggedInUser ] = useState( null )
@@ -63,10 +64,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         { loggedInUser ?
-            <h2>Welcome { loggedInUser.name }! :)</h2> 
+            <h2>Welcome { loggedInUser.name } :)</h2> 
             :
             <>
-              <h1>Welcome! Login?</h1>
+              <h1>Login</h1>
               <form onSubmit={ handleLoginSubmit } >
 
                   <label>username</label>
@@ -84,6 +85,7 @@ function App() {
               </form>
             </>
         }
+        <Posts/>
       </header>
     </div>
   );
